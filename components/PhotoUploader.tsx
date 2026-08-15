@@ -53,8 +53,8 @@ export const PhotoUploader: React.FC<PhotoUploaderProps> = ({
 
     const logStream = [
       '[NYORIA CELLULAR FACIAL SCANNER INITIALIZED]',
-      '[PURE FACIAL DERMAL LOCK: FOREHEAD & CHEEKS REGISTERED]',
-      '[PURE FACIAL DERMAL LOCK: NOSE, NASAL ALAR & CHIN SENSORS LOCK]',
+      '[NATURAL BARE-FACE DERMAL LOCK: FOREHEAD & CHEEKS REGISTERED]',
+      '[NATURAL BARE-FACE DERMAL LOCK: NOSE, NASAL ALAR & CHIN SENSORS LOCK]',
       '[T-ZONE & U-ZONE LIPID BALANCING ANALYSIS...]',
       '[EPIDERMAL MOISTURE DEFICIT MAPPING IN PROGRESS...]',
       '[VASCULAR ERYTHEMA & PIGMENT UNIFORMITY: COMPUTING...]',
@@ -170,6 +170,19 @@ export const PhotoUploader: React.FC<PhotoUploaderProps> = ({
               /* PHOTO VIEWPORT OR DROPZONE STATE */
               <motion.div key="upload" className="space-y-6">
                 
+                {/* Natural Bare-Face Warning Banner */}
+                <div className="p-4 rounded-2xl glass-card border border-amber-500/50 bg-amber-500/10 text-amber-300 text-xs font-semibold flex items-center gap-3 shadow-lg">
+                  <ShieldAlert className="w-6 h-6 shrink-0 text-amber-400 animate-pulse" />
+                  <div>
+                    <strong className="block text-amber-200 font-extrabold uppercase tracking-wide">
+                      ⚠️ Bare-Face Photo Required
+                    </strong>
+                    <span>
+                      Please upload a natural bare-face photo. Do NOT use makeup or filter photos, otherwise the 20-metric dermal scan results will be inaccurate.
+                    </span>
+                  </div>
+                </div>
+
                 {previewUrl ? (
                   /* SELECTED PHOTO VIEWPORT */
                   <div className="space-y-4">
@@ -205,7 +218,7 @@ export const PhotoUploader: React.FC<PhotoUploaderProps> = ({
                           Drop photo here, or <span className="text-violet-400 underline">browse files</span>
                         </p>
                         <p className="text-xs text-[var(--text-muted)]">
-                          Upload your face photo for 20-metric Nyoria skin diagnostic analysis.
+                          Natural bare-face photo (no makeup/filters) for 20-metric Nyoria skin diagnostic analysis.
                         </p>
                       </div>
                     </label>
