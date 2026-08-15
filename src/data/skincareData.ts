@@ -272,7 +272,7 @@ export const RECOMMENDED_PRODUCTS: Product[] = [
     name: 'Hydro-Lock Multi-Peptide Emulsion',
     brand: 'DermaLux MedSpa',
     category: 'Moisturizer',
-    image: 'https://images.unsplash.com/photo-1608248597261-83325803746f?auto=format&fit=crop&q=80&w=600',
+    image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&q=80&w=600',
     activeIngredients: ['5 Multi-HA Weights', 'Copper Tripeptide-1'],
     rating: 4.9,
     reviewCount: 410,
