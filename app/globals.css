@@ -1,0 +1,174 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F3F3FF;
+  --bg-surface: rgba(255, 255, 255, 0.75);
+  --bg-card: rgba(255, 255, 255, 0.85);
+
+  --accent-purple: #7C3AED;
+  --accent-violet: #8B5CF6;
+  --accent-cyan: #06B6D4;
+  --accent-rose: #F43F5E;
+  --accent-emerald: #10B981;
+
+  --text-primary: #090D1A;
+  --text-secondary: #475569;
+  --text-muted: #94A3B8;
+
+  --border-color: rgba(226, 232, 240, 0.8);
+  --border-glass: rgba(255, 255, 255, 0.6);
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(226, 232, 240, 0.8);
+  --glass-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.08);
+
+  --laser-gradient: linear-gradient(90deg, transparent 0%, #06B6D4 30%, #8B5CF6 50%, #06B6D4 70%, transparent 100%);
+  --laser-shadow: 0 0 20px #06B6D4, 0 0 40px #8B5CF6;
+}
+
+[data-theme='dark'] {
+  --bg-primary: #05070C;
+  --bg-secondary: #0B0F19;
+  --bg-surface: rgba(15, 23, 42, 0.75);
+  --bg-card: rgba(15, 23, 42, 0.8);
+
+  --accent-purple: #8B5CF6;
+  --accent-violet: #A855F7;
+  --accent-cyan: #38BDF8;
+  --accent-rose: #FB7185;
+  --accent-emerald: #34D399;
+
+  --text-primary: #F8FAFC;
+  --text-secondary: #CBD5E1;
+  --text-muted: #94A3B8;
+
+  --border-color: rgba(51, 65, 85, 0.8);
+  --border-glass: rgba(255, 255, 255, 0.12);
+  --glass-bg: rgba(11, 15, 25, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.14);
+  --glass-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.55);
+
+  --laser-gradient: linear-gradient(90deg, transparent 0%, #38BDF8 30%, #A855F7 50%, #38BDF8 70%, transparent 100%);
+  --laser-shadow: 0 0 25px #38BDF8, 0 0 50px #A855F7;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+body {
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Glassmorphism Classes */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: 1.5rem;
+}
+
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border-glass);
+  border-radius: 1.25rem;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.glow-text-violet {
+  background: linear-gradient(135deg, #8B5CF6 0%, #06B6D4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+[data-theme='dark'] .glow-text-violet {
+  background: linear-gradient(135deg, #C084FC 0%, #38BDF8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Cyber Neon Laser Beam Sweep */
+@keyframes laserSweep {
+  0% { top: 5%; opacity: 0.8; }
+  50% { top: 90%; opacity: 1; }
+  100% { top: 5%; opacity: 0.8; }
+}
+
+.laser-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--laser-gradient);
+  box-shadow: var(--laser-shadow);
+  animation: laserSweep 3.2s ease-in-out infinite;
+  z-index: 10;
+}
+
+/* Rolling underline effect */
+.rolling-underline {
+  position: relative;
+  text-decoration: none;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.rolling-underline::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--accent-purple);
+  transform-origin: bottom right;
+  transition: transform 0.3s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.rolling-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-purple);
+}
+
+/* Hide Next.js Dev Overlay Badges & Error Toast Issue Buttons */
+[data-nextjs-toast],
+[data-nextjs-dialog-overlay],
+[data-nextjs-toast-errors],
+nextjs-portal,
+#nextjs-dev-overlay,
+.__next-dev-overlay {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
