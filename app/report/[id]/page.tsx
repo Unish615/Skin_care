@@ -32,16 +32,24 @@ export default function ReportPage() {
           if (parsed?.result) {
             setReportResult({
               ...parsed.result,
-              id: reportId
+              id: reportId,
+              overallScore: queryScore ? parseInt(queryScore, 10) || parsed.result.overallScore : parsed.result.overallScore,
+              detectedSkinType: queryType ? (queryType as SkinType) : parsed.result.detectedSkinType
             });
           }
           if (parsed?.patientName && !queryName) {
             setPatientName(parsed.patientName);
           }
+        } else {
+          setReportResult(prev => ({
+            ...prev,
+            overallScore: queryScore ? parseInt(queryScore, 10) || prev.overallScore : prev.overallScore,
+            detectedSkinType: queryType ? (queryType as SkinType) : prev.detectedSkinType
+          }));
         }
       } catch (err) {}
     }
-  }, [reportId, queryName]);
+  }, [reportId, queryName, queryScore, queryType]);
 
   return (
     <DigitalSoftcopyReportView
