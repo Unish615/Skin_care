@@ -1,25 +1,24 @@
 import QRCode from 'qrcode';
 
 /**
- * Returns accessible network base URL for mobile phone scanning over Wi-Fi.
- * Replaces localhost with the actual local IP (192.168.1.96:3000) so mobile phones can connect.
+ * Returns accessible network base URL for mobile phone scanning over cellular or Wi-Fi.
+ * Defaults to live Vercel production URL so any mobile phone camera anywhere opens the report instantly.
  */
 export function getNetworkBaseUrl(): string {
   if (typeof window !== 'undefined') {
     const origin = window.location.origin;
-    if (origin.includes('localhost') || origin.includes('127.0.0.1')) {
-      return 'http://192.168.1.96:3000';
+    if (origin && !origin.includes('localhost') && !origin.includes('127.0.0.1')) {
+      return origin;
     }
-    return origin;
   }
-  return 'http://192.168.1.96:3000';
+  return 'https://skincare-nyoria.vercel.app';
 }
 
 /**
  * Generates an ISO/IEC 18004 standards-compliant PNG Data URI QR Code locally on the client.
  * Guaranteed 100% smartphone camera scannability with ZERO external server calls and ZERO green boxes!
  */
-export async function generateQRCodeDataURIAsync(text: string, size: number = 280): Promise<string> {
+export async function generateQRCodeDataURIAsync(text: string, size: number = 300): Promise<string> {
   try {
     const dataUrl = await QRCode.toDataURL(text, {
       margin: 2,
@@ -33,7 +32,6 @@ export async function generateQRCodeDataURIAsync(text: string, size: number = 28
     return dataUrl;
   } catch (err) {
     console.error('QR Code Data URI generation error:', err);
-    // Return standard fallback QR Data URL
     return 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==';
   }
 }
